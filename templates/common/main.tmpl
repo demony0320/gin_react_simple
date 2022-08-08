@@ -1,0 +1,14 @@
+{{ define "main" }}
+<html>
+<head>
+{{ template "base" }} 
+   <script src="https://cdn.jsdelivr.net/npm/@ckeditor/ckeditor5-react@5.0.2/dist/ckeditor.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@ckeditor/ckeditor5-build-classic@34.2.0/build/ckeditor.min.js"></script>
+   <!-- <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js" ></script>-->
+    <script src="/assets/post_editor.js" type="text/babel"> </script>
+</head>
+<body>
+    <div id="post_editor"> </div>
+</body>
+</html>
+{{ end }}

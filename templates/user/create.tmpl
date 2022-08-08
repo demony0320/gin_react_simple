@@ -1,0 +1,38 @@
+{{ define "userCreate" }}
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Index, Currently list of all users</title>
+{{ template "base" }}
+</head>
+<body>
+<!--
+{{range .data}}
+    <p>{{.Name}}</p>
+    <p>{{.Userid}}</p>
+    <p>{{.Level}}</p>
+{{end}}
+-->
+<!--
+<form>
+  <label>
+    Name:
+    <input type="text" name="name" />
+  </label>
+  <input type="submit" value="Submit" />
+</form>
+-->
+<!--
+<div id="like_button_container"></div>
+<script src="/assets/like_button.js"></script>
+<div id="test"></div>
+<script src="/assets/test.js" type="text/babel"></script>
+-->
+<div id="userform"></div>
+<script src="/assets/user_temp.js" type="text/babel"></script>
+
+</body>
+
+</html>
+{{ end }}

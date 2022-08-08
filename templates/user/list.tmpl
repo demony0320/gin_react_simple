@@ -1,0 +1,20 @@
+{{ define "userList" }}
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Index, Currently list of all users</title>
+
+</head>
+ {{ template "base" }}
+
+<body>
+{{range .data}}
+    <p>{{.Name}}</p>
+    <p>{{.Userid}}</p>
+    <p>{{.Level}}</p>
+{{end}}
+</body>
+
+</html>
+{{ end }}
