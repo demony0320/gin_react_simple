@@ -2,12 +2,15 @@ package model
 
 import (
 	"fmt"
+    //"log"
     "encoding/json"
     "net/http"
 	"gorm.io/gorm"
 	"github.com/gin-gonic/gin"
     "io/ioutil"
 	"go-web/util/token"
+    //test
+	//"go-web/util/grpc/helloworld/greeter_client"
 )
 
 type user struct {
@@ -28,6 +31,7 @@ func (u user) MarshalJSON() ([]byte, error) {
 }
 
 func (mh *ModelHandler) FetchAllUser() ([]user,error){
+
         var users []user
         result := mh.Db.Find(&users)
         return users, result.Error
@@ -39,7 +43,7 @@ func (mh *ModelHandler) CreateUser(c *gin.Context){
          c.JSON(http.StatusInternalServerError, gin.H {
             "message" : err.Error(),
         })
-         return 
+         return
       }
       fmt.Println("Request: ", u)
      // u := user{Userid: json.Userid,Name: json.Name,Level:json.Level,Password: json.Password}
@@ -49,7 +53,7 @@ func (mh *ModelHandler) CreateUser(c *gin.Context){
             "message" : result.Error.Error(),
         })
         return
-      } 
+      }
       fmt.Println("Created User : ", u)
 
       c.JSON(http.StatusOK, gin.H{
@@ -59,6 +63,14 @@ func (mh *ModelHandler) CreateUser(c *gin.Context){
       })
 }
 func (mh *ModelHandler) FetchUser(c *gin.Context){
+
+    /* Temp grpc request
+    fmt.Println("SEnd GRPC Request!")
+     grpc_err := greeter_client.SendHello("localhost:50052","GinServer")
+     if grpc_err != nil {
+        log.Fatalf("Cannot Send GRPC to Remote: %v", grpc_err)
+    }
+    */
     userid := c.Query("userid")
     if userid != ""{
         //Userid is specified.
@@ -132,7 +144,8 @@ func (mh *ModelHandler) DeleteUser(c *gin.Context){
         return
      }
 
-    result = mh.Db.Delete(&fetchUser)
+    //result = mh.Db.Delete(&fetchUser)
+    result = mh.Db.Unscoped().Delete(&fetchUser)
 
     if result.Error != nil {
         c.JSON(http.StatusInternalServerError, gin.H {

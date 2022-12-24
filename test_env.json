@@ -1,0 +1,11 @@
+{
+    "DbType" : "PostgreSQL",
+    "DbHost" : "localhost",
+    "DbPort" : 5432,
+    "DbName" : "jeff_test_db",
+    "DbUser" : "postgres",
+    "DbPass" : "postgres",
+    "TimeZone" : "Asia/Seoul"
+}
+    
+

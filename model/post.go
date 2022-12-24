@@ -59,7 +59,7 @@ func (mh *ModelHandler) CreatePost(c *gin.Context){
          c.JSON(http.StatusInternalServerError, gin.H {
             "message" : err.Error(),
         })
-        return 
+        return
     }
 
     //mh.UploadFiles(c) 
@@ -69,13 +69,14 @@ func (mh *ModelHandler) CreatePost(c *gin.Context){
           "message" : result.Error.Error(),
       })
     return
-    } 
+    }
     fmt.Println("Created Post: ", p)
 
     c.JSON(http.StatusOK, gin.H{
         "message": "Create User Successful",
         "Subject" : p.Subject,
         "Category" : p.Category,
+        "ID" : p.ID,
     })
 }
 
