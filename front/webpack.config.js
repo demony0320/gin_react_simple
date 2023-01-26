@@ -85,6 +85,7 @@ module.exports = {
 	devServer: {
 		//static: 'public',
 		contentBase: 'public',
+		host: '0.0.0.0',
 		//devMiddleware: { publicPath: '/public' },
   		//static: { directory: path.resolve(__dirname) },
 		hot: true,

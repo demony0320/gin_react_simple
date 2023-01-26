@@ -1,6 +1,7 @@
 <script>
 
 import { navigate } from "svelte-navigator";
+import { get_backend_url } from "../../components/Util.svelte";
 
     let signupUser = {
     userid: "",
@@ -17,8 +18,10 @@ async function handleOnSubmit() {
     console.log(status);
     console.log(status == true);
     if (status == true) {
+        const url = get_backend_url();
+        console.log(`url : ${url}`);
         delete signupUser.confirmpassword;
-        const res = await fetch('http://52.78.73.92:8000/user', {
+        const res = await fetch(`${url}/user`, {
         method: 'POST',
         body: JSON.stringify(signupUser)
       });

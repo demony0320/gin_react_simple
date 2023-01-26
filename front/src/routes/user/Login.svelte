@@ -1,6 +1,7 @@
 <script>
 
-import { navigate } from "svelte-navigator";
+//import { navigate } from "svelte-navigator";
+import { get_backend_url } from "../../components/Util.svelte";
 
     let loginInfo = {
     userid: "",
@@ -9,35 +10,51 @@ import { navigate } from "svelte-navigator";
 };
 
 async function handleOnSubmit() {
-        console.log('Before send message')
-        console.log(JSON.stringify(loginInfo))
-        const res = await fetch('http://52.78.73.92:8000/login', {
+  var res_status ='';
+  var res_text='' ;
+  var token='';
+  var message;
+  try {
+        //console.log('Before send message')
+        const controller = new AbortController();
+        // 5 second timeout:
+
+        const timeout = 5000 ;
+        const timeoutId = setTimeout(() => controller.abort() , timeout);
+
+        console.log(JSON.stringify(loginInfo));
+        const url = get_backend_url();
+        const res = await fetch(`${url}/login`, {
         method: 'POST',
+        timeout : timeout,
+        signal : controller.signal,
         body: JSON.stringify(loginInfo)
         });
-      //console.log(res);
-      const res_status = res.status;
-      const res_text =res.statusText;
-      var message ='';
-      var token='';
-      try {
-        const json_res = await res.json();
-        console.log(json_res);
-        message =json_res.message;
-        token =json_res.token;
-      } catch (error){
-        alert('Unexpected Error While response to Json')
-      }
-      if (res.status == 200){
-        alert('Login Successful');
-        sessionStorage.setItem('token',token);
-        console.log(sessionStorage.getItem('token'));
 
-        window.location.replace('/');
-      } else{
-        const msg = 'Login Failed. status: ' + res_status +  ', status msg: ' + res_text + ', server msg: ' + message ;
-        alert(msg);
+        res_status = res.status;
+        res_text =res.statusText;
+        clearTimeout(timeoutId);
+
+        const json_res = await res.json();
+        token = json_res.token;
+        message= json_res.message;
+        console.log("After await json function : " , json_res);
+      } catch (err){
+        console.log("Fetch Error Msg: ", err);
+        alert('Unexpected Error While response to Json', err.message);
       }
+
+
+    if (res_status == 200){
+      alert('Login Successful');
+      sessionStorage.setItem('token',token);
+      console.log(sessionStorage.getItem('token'));
+
+      window.location.replace('/');
+    } else{
+      const msg = 'Login Failed. status: ' + res_status +  ', status msg: ' + res_text + ', server msg: ' + message ;
+      alert(msg);
+    }
     
 		
 	}

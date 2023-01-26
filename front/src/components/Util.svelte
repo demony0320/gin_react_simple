@@ -1,6 +1,7 @@
 
 <script context="module">
   import { navigate } from "svelte-navigator";
+  const pkgConfig = require('../../package.json');
 
     export async function auth_fetch(url) {
       console.log('auth_fetch start');
@@ -29,6 +30,11 @@
 			alert("Logout, Session would be clear");
       navigate ('/');  
 
+    }
+    export function get_backend_url() {
+      alert(pkgConfig.backendUrl);
+      console.log(`BackendUrl : ${pkgConfig.backendUrl}`);
+      return pkgConfig.backendUrl;
     }
 
 

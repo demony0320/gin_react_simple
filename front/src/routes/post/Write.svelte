@@ -26,7 +26,6 @@ const handleOnSubmit = async e => {
   e.preventDefault()
   //post_form_data.content = editor.children[0].innerHT`ML;
   
-
   var contents = quill.getContents();
   console.log(typeof(contents), contents)
   //console.log("root innerhtml :", quill.root.innerHTML)
@@ -64,10 +63,7 @@ const handleOnSubmit = async e => {
   
   //var texts = quill.getText();
 
-  
-
-  
-
+  /*
   for (var op of contents.ops) 
   {
     //formData.append(op.insert)
@@ -83,18 +79,21 @@ const handleOnSubmit = async e => {
     }
     //console.log("typeof op: ", typeof(op), " type of insert : ", typeof(op.insert))
   }
+*/
 
   try {
-    console.log('formData : ', formData.entries())
-  const upload_resp = await fetch ('http://52.78.73.92:8000/upload' , {
-    method: 'POST',
-    headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'multipart/form-data',
-  },
-    body: formData
-  })
-  alert('file upload successful', upload_resp)
+    if (imgs.length > 0) {
+      console.log('formData : ', formData.entries())
+      const upload_resp = await fetch ('http://52.78.73.92:8000/upload' , {
+        method: 'POST',
+        headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'multipart/form-data',
+      },
+        body: formData
+      })
+      alert('file upload successful', upload_resp)
+      }
   }
   catch(err){
     console.log("Error : ", err ) 

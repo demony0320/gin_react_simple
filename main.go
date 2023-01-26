@@ -69,6 +69,8 @@ func SetupRestRouter(mh *model.ModelHandler) *gin.Engine {
     r.POST("/file", mh.SaveFileHandler)
 	r.POST("/upload", mh.UploadFiles)
 
+	r.GET("/scrap/humor", mh.ScrapHumor)
+	r.GET("/scrap/news", mh.ScrapNews)
     //Lets use HTML
     r.Static("/assets","./assets")
     //Lets Start to Write new Templates Through html/template module

@@ -1,7 +1,7 @@
 <script>
     import { Router, Route, Link } from "svelte-navigator";
     import { onMount } from 'svelte';
-    import { auth_fetch } from "../../components/Util.svelte";
+    import { auth_fetch, get_backend_url } from "../../components/Util.svelte";
     //export let UserList;
 
 
@@ -10,7 +10,8 @@
 
  
 	onMount(async () => {
-    const result = await auth_fetch('http://52.78.73.92:8000/admin/user');
+    const url = get_backend_url();
+    const result = await auth_fetch(`${url}/admin/user`);
     console.log(result);
     users=result;
 

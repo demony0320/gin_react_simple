@@ -1,6 +1,7 @@
 <script>
     import { Router, Route, Link } from "svelte-navigator";
     import { onMount } from 'svelte';
+    import { get_backend_url } from "../../components/Util.svelte";
 
     //export let UserList;
 
@@ -8,7 +9,8 @@
 	let posts = [];
 
 	onMount(async () => {
-		const res = await fetch(`http://52.78.73.92:8000/post`);
+    const url = get_backend_url()
+		const res = await fetch(`${url}/post`);
 		posts = await res.json();
 	});
   </script>
